@@ -1,14 +1,3 @@
-"""
-A minimal AI agent built from scratch — using Groq's free API (OpenAI-compatible).
-
-Setup:
-    pip install openai
-    Get a free key at: https://console.groq.com  (no card required)
-    set GROQ_API_KEY=your-key-here
-
-Run:
-    python groq_agent.py
-"""
 
 import os
 import json
@@ -23,9 +12,7 @@ client = OpenAI(
 MODEL = "llama-3.3-70b-versatile"
 
 
-# -----------------------------
-# STEP 1: Write real functions the agent can call
-# -----------------------------
+
 
 def get_current_time():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -33,8 +20,7 @@ def get_current_time():
 
 def calculate(expression: str):
     try:
-        # NOTE: eval() is unsafe for untrusted input in real apps.
-        # Fine for a learning project, not for production.
+       
         return str(eval(expression, {"__builtins__": {}}))
     except Exception as e:
         return f"Error: {e}"
@@ -45,9 +31,7 @@ AVAILABLE_TOOLS = {
     "calculate": calculate,
 }
 
-# -----------------------------
-# STEP 2: Describe those functions as JSON schemas
-# -----------------------------
+
 
 TOOL_SCHEMAS = [
     {
@@ -78,9 +62,7 @@ TOOL_SCHEMAS = [
 ]
 
 
-# -----------------------------
-# STEP 3: The agent loop itself
-# -----------------------------
+
 
 def run_agent(user_input, max_iterations=5):
     messages = [
@@ -124,9 +106,7 @@ def run_agent(user_input, max_iterations=5):
     return "Gave up after too many steps — the agent may be stuck."
 
 
-# -----------------------------
-# STEP 4: Try it
-# -----------------------------
+
 
 if __name__ == "__main__":
     print("Simple agent (Groq) ready. Type 'quit' to exit.\n")
